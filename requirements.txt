@@ -1,0 +1,7 @@
+firebase-admin
+firebase
+pandas
+scipy
+matplotlib
+xgboost
+scikit-learn
