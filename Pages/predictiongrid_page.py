@@ -54,7 +54,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
       n_estimators=1000,
       learning_rate=0.01,
       max_depth=3,
-      early_stopping_rounds=20,
+      early_stopping_rounds=50,
       n_jobs=1,
       verbosity=0,
       base_score=0.5  
