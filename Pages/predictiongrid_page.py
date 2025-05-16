@@ -49,12 +49,22 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
 
     # Train the model
     reg = xgb.XGBRegressor(
-        base_score=0.5, booster='gbtree',
-        n_estimators=1000, early_stopping_rounds=50,
-        objective='reg:squarederror', max_depth=3,
-        learning_rate=0.01
+      booster='gbtree',
+      objective='reg:squarederror',
+      n_estimators=1000,
+      learning_rate=0.01,
+      max_depth=3,
+      early_stopping_rounds=20,
+      n_jobs=1,
+      verbosity=0
     )
-    reg.fit(X_train, y_train, eval_set=[(X_train, y_train), (X_test, y_test)], verbose=100)
+
+    reg.fit(
+      X_train, y_train,
+      eval_set=[(X_test, y_test)],
+      verbose=False
+    )
+
 
     # Feature importance plot
     fi = pd.DataFrame(data=reg.feature_importances_, index=reg.feature_names_in_, columns=['importance'])
