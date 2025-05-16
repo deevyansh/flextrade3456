@@ -58,24 +58,28 @@ admin2_page=st.Page(
 )
 
 
-predictionfactory_page=st.Page(
+predictionfactory_page = st.Page(
     page="Pages/predictionfactory_page.py",
-    title="Prediction Factory"
+    title="Prediction Factory",
+    icon="🏭"  # Factory icon
 )
 
-predictiongrid_page=st.Page(
+predictiongrid_page = st.Page(
     page="Pages/predictiongrid_page.py",
-    title="Prediction Grid"
+    title="Prediction Grid",
+    icon="🔌"  # Electric plug for grid
 )
 
-strategicbid_page=st.Page(
+strategicbid_page = st.Page(
     page="Pages/strategicbid_page.py",
-    title="Strategic Bid"
+    title="Strategic Bid",
+    icon="🎯"  # Target icon
 )
 
-home_page=st.Page(
+home_page = st.Page(
     page="Pages/home_page.py",
-    title="Home Page"
+    title="Home Page",
+    icon="🏠"  # Home icon
 )
 
 
