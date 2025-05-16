@@ -52,7 +52,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
         n_estimators=1000,                # Fewer boosting rounds (faster)
         learning_rate=0.01,              # Faster convergence
         max_depth=3,                     # Controls complexity
-        early_stopping_rounds=20,        # Stops early if no improvement
+        early_stopping_rounds=50,        # Stops early if no improvement
         n_jobs=1,                        # Avoid multi-threading overhead in Streamlit
         verbosity=0                      # Disable logging to avoid UI slowdown
     )
