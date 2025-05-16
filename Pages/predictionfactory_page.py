@@ -49,7 +49,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     reg = xgb.XGBRegressor(
         booster='gbtree',
         objective='reg:squarederror',
-        n_estimators=200,                # Fewer boosting rounds (faster)
+        n_estimators=500,                # Fewer boosting rounds (faster)
         learning_rate=0.05,              # Faster convergence
         max_depth=3,                     # Controls complexity
         early_stopping_rounds=20,        # Stops early if no improvement
