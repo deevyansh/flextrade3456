@@ -48,7 +48,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     print("Training of the xgb started")
     reg = xgb.XGBRegressor(
         base_score=0.5, booster='gbtree',
-        n_estimators=1000, early_stopping_rounds=50,
+        n_estimators=10, early_stopping_rounds=50,
         objective='reg:squarederror', max_depth=3,
         learning_rate=0.01
     )
