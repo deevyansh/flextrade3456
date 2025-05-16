@@ -47,12 +47,22 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     # Train the model
     print("Training of the xgb started")
     reg = xgb.XGBRegressor(
-        base_score=0.5, booster='gbtree',
-        n_estimators=100, early_stopping_rounds=50,
-        objective='reg:squarederror', max_depth=3,
-        learning_rate=0.01
+        booster='gbtree',
+        objective='reg:squarederror',
+        n_estimators=200,                # Fewer boosting rounds (faster)
+        learning_rate=0.05,              # Faster convergence
+        max_depth=3,                     # Controls complexity
+        early_stopping_rounds=20,        # Stops early if no improvement
+        n_jobs=1,                        # Avoid multi-threading overhead in Streamlit
+        verbosity=0                      # Disable logging to avoid UI slowdown
     )
-    reg.fit(X_train, y_train, eval_set=[(X_train, y_train), (X_test, y_test)], verbose=100)
+    
+    reg.fit(
+       X_train, y_train,
+       eval_set=[(X_test, y_test)],     # Only monitor test loss
+       eval_metric="rmse",              # Faster metric than logloss
+       verbose=False                    # No per-iteration output
+    )
 
     # Feature importance plot
     print("Training finished")
