@@ -60,7 +60,6 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     reg.fit(
        X_train, y_train,
        eval_set=[(X_test, y_test)],     # Only monitor test loss
-       eval_metric="rmse",              # Faster metric than logloss
        verbose=False                    # No per-iteration output
     )
 
