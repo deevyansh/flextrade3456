@@ -3,5 +3,5 @@ firebase
 pandas
 scipy
 matplotlib
-xgboost
+xgboost>=1.7.0
 scikit-learn
