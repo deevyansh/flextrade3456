@@ -45,6 +45,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     y_test = test[TARGET]
 
     # Train the model
+    print("Training of the xgb started")
     reg = xgb.XGBRegressor(
         base_score=0.5, booster='gbtree',
         n_estimators=1000, early_stopping_rounds=50,
@@ -54,6 +55,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
     reg.fit(X_train, y_train, eval_set=[(X_train, y_train), (X_test, y_test)], verbose=100)
 
     # Feature importance plot
+    print("Training finished")
     fi = pd.DataFrame(data=reg.feature_importances_, index=reg.feature_names_in_, columns=['importance'])
     st.subheader("Feature Importance")
     st.bar_chart(fi.sort_values('importance'))
@@ -107,6 +109,7 @@ def train_and_predict(data, start_date, start_time, end_date, end_time,target_co
 
 
 def display():
+    print("Hello i am in the prediction section")
     st.title("Prediction Section")
 
     # Check if data exists in session state
@@ -118,7 +121,9 @@ def display():
     data2 = st.session_state["uploaded_data_2"]
 
     # Preprocess the data
+    print("Data preprocessing started")
     data2 = preprocess_data(data2)
+    print("Data preprocessing finished")
 
     # Display the data preview
     st.subheader("Data Preview")
@@ -143,5 +148,7 @@ def display():
 
     # Trigger prediction
     if st.button("Run Prediction"):
+        print("Button pressed")
         train_and_predict(data2, start_date, start_time, end_date, end_time, target_column)
+        print("training done")
 display()
