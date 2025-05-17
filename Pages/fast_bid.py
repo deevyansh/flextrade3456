@@ -180,7 +180,7 @@ else:
                 message["To"] = return_email(Obj)
                 print(message["To"], message.as_string())
                 server.sendmail("flexiblemarket0@gmail.com", return_email(Obj), message.as_string())
-                server.quit
+                server.quit()
 
 
 
