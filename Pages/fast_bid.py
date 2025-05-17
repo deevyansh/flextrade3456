@@ -168,19 +168,37 @@ else:
                 storethedata("Bids", Obj)
 
 
-            if (EMAIL_OPTION == "YES"):
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                # server.login('deevyansh.iitd@gmail.com', 'fvay qntl tetx bdyo')
-                server.login('flexiblemarket0@gmail.com', 'uvpk bdlk vqdl icmh')
-                message = MIMEText(str, "plain")
-                message["Subject"] = "Regarding the Bids submitted on the Flexible Market Portal"
-                message["From"] = "flexiblemarket0@gmail.com"
-                Obj = {"User": get("user")}
-                message["To"] = return_email(Obj)
-                print(message["To"], message.as_string())
-                server.sendmail("flexiblemarket0@gmail.com", return_email(Obj), message.as_string())
-                server.quit()
+            if EMAIL_OPTION == "YES":
+                try:
+                    # Set up the SMTP server
+                    server = smtplib.SMTP('smtp.gmail.com', 587)
+                    server.starttls()
+        
+                    # Login credentials
+                    server.login('flexiblemarket0@gmail.com', 'uvpk bdlk vqdl icmh')
+        
+                    # Compose the message
+                    msg_body = "Your message content here"  # Replace with actual content
+                    message = MIMEText(msg_body, "plain")
+                    message["Subject"] = "Regarding the Bids submitted on the Flexible Market Portal"
+                    message["From"] = "flexiblemarket0@gmail.com"
+                    
+                    # Get recipient email
+                    Obj = {"User": get("user")}
+                    recipient = return_email(Obj)
+                    message["To"] = recipient
+                    
+                    # Print for debug
+                    print(recipient, message.as_string())
+                    
+                    # Send email
+                    server.sendmail("flexiblemarket0@gmail.com", recipient, message.as_string())
+    
+                except Exception as e:
+                    print("Error while sending email:", e)
+    
+                finally:
+                    server.quit()
 
 
 
