@@ -37,8 +37,6 @@ if(main_option=="Single"):
         l.append("Hour:" + str(int(row["hour"])) + " Prescribed Quantity(in kWh):" + str(row["value"]))
     result=st.radio("Select the Hour",l)
 
-    EMAIL_OPTION = st.radio("Send me a Email Receipt of Bid", ["YES", "NO"])
-
     if(st.button("Final the Bid")):
         p=True
         hour = int(float(result.split("Hour:")[1].split(" Prescribed Quantity")[0]))
@@ -71,20 +69,7 @@ if(main_option=="Single"):
             str = str + (
                 f"""Price={Obj["Price"]}, Quantity={Obj["Quantity"]}, Date={Obj["Date"]}/{Obj["Month"]}/{Obj["Year"]}, Hour={Obj["Hour"]}\n""")
 
-            if (EMAIL_OPTION == "YES"):
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                # server.login('deevyansh.iitd@gmail.com', 'fvay qntl tetx bdyo')
-                server.login('flexiblemarket0@gmail.com', 'uvpk bdlk vqdl icmh')
-                message = MIMEText(str, "plain")
-                message["Subject"] = "Regarding the Bids submitted on the Flexible Market Portal"
-                message["From"] = "flexiblemarket0@gmail.com"
-                Obj = {"User": get("user")}
-                message["To"] = return_email(Obj)
-                print(message["To"], message.as_string())
-                server.sendmail("flexiblemarket0@gmail.com", return_email(Obj), message.as_string())
-                server.quit
-
+            
 else:
     input = st.date_input("Bidding Date")
     date = input.day
@@ -130,7 +115,7 @@ else:
         if st.checkbox(i):
             selected_hours.append(i)
 
-    EMAIL_OPTION =st.radio("Send me a Email Receipt of Bid",["YES","NO"])
+    
 
 
     if (st.button("Final the Bid")):
@@ -168,37 +153,7 @@ else:
                 storethedata("Bids", Obj)
 
 
-            if EMAIL_OPTION == "YES":
-                try:
-                    # Set up the SMTP server
-                    server = smtplib.SMTP('smtp.gmail.com', 587)
-                    server.starttls()
-        
-                    # Login credentials
-                    server.login('flexiblemarket0@gmail.com', 'uvpk bdlk vqdl icmh')
-        
-                    # Compose the message
-                    msg_body = "Your message content here"  # Replace with actual content
-                    message = MIMEText(msg_body, "plain")
-                    message["Subject"] = "Regarding the Bids submitted on the Flexible Market Portal"
-                    message["From"] = "flexiblemarket0@gmail.com"
-                    
-                    # Get recipient email
-                    Obj = {"User": get("user")}
-                    recipient = return_email(Obj)
-                    message["To"] = recipient
-                    
-                    # Print for debug
-                    print(recipient, message.as_string())
-                    
-                    # Send email
-                    server.sendmail("flexiblemarket0@gmail.com", recipient, message.as_string())
-    
-                except Exception as e:
-                    print("Error while sending email:", e)
-    
-                finally:
-                    server.quit()
+           
 
 
 
