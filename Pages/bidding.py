@@ -37,7 +37,7 @@ if(Bid_Input=="Multiple Bid"):
     l[2].append(to_widget3.number_input("To Hour3", min_value=0, max_value=23))
 
 
-options=st.radio("Send Me a Email Receipt of the Bids",["Yes","No"])
+
 
 
 if(st.button("Submit the Bids")):
@@ -88,19 +88,7 @@ if(st.button("Submit the Bids")):
                      "State": "Waiting"}
                 str=str+(f"""Price={Obj["Price"]}, Quantity={Obj["Quantity"]}, Date={Obj["Date"]}/{Obj["Month"]}/{Obj["Year"]}, Hour={Obj["Hour"]}\n""")
                 storethedata("Bids",Obj)
-        if (options == "Yes"):
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            # server.login('deevyansh.iitd@gmail.com', 'fvay qntl tetx bdyo')
-            server.login('flexiblemarket0@gmail.com', 'uvpk bdlk vqdl icmh')
-            message=MIMEText(str,"plain")
-            message["Subject"]= "Regarding the Bids submitted on the Flexible Market Portal"
-            message["From"]="flexiblemarket0@gmail.com"
-            Obj={"User":get("user")}
-            message["To"] = return_email(Obj)
-            print(message["To"], message.as_string())
-            server.sendmail("flexiblemarket0@gmail.com",return_email(Obj),message.as_string())
-            server.quit()
+       
 
 
 
